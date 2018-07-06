@@ -37,4 +37,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_dependency "aws-sdk-rds", "~> 1.23"
   spec.add_dependency "aws-sdk-ec2", "~> 1.37"
+  spec.add_dependency "dotenv", "~> 2.5"
 end

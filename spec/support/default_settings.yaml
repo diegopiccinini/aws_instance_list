@@ -1,0 +1,8 @@
+---
+RDS:
+  db:
+    fields:
+      - db_name
+      - engine
+      - allocated_storage
+      - db_instance_status

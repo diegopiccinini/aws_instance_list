@@ -1,4 +1,5 @@
 require 'aws-sdk-rds'
+require 'yaml'
 
 module AwsInstanceList
 
@@ -22,10 +23,29 @@ module AwsInstanceList
       @db_intances||=db_descriptions(options).db_instances
     end
 
-    def db_list fields=[:db_name,:engine,:allocated_storage, :db_instance_status]
+    def db_list fields: nil
+
+      fields||=load_db_fields
+
       db_instances.map do |i|
         fields.map { |f| i.send(f) } << region
       end
+    end
+
+    def load_db_fields
+      yaml['db']['fields']
+    end
+
+    def yaml
+      @yaml||=yaml_default.merge(yaml_file)[self.class.name.split('::').last]
+    end
+
+    def yaml_default
+      YAML.load_file AwsInstanceList::DEFAULT_SETTINGS
+    end
+
+    def yaml_file
+      ENV.has_key?('AWS_INSTANCE_LIST_YAML') ? YAML.load_file(ENV['AWS_INSTANCE_LIST_YAML']) : {}
     end
 
   end

@@ -2,6 +2,12 @@ require "aws_instance_list/version"
 require "aws_instance_list/region"
 require "aws_instance_list/rds"
 
+require 'dotenv/load'
+
+Dotenv.load
+
 module AwsInstanceList
-  # Your code goes here...
+
+  DEFAULT_SETTINGS= File.join(%w(spec support default_settings.yaml))
+
 end
