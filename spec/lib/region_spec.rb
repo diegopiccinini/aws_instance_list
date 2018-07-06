@@ -1,11 +1,13 @@
 require 'spec_helper'
 
-describe AwsInstanceList::Region do
+include AwsInstanceList
 
-  it { expect(AwsInstanceList::Region.ec2).to be_a Aws::EC2::Client }
+describe Region do
 
-  it { expect(AwsInstanceList::Region.descriptions.regions).to be_a Array }
+  it { expect(Region.ec2).to be_a Aws::EC2::Client }
 
-  it { expect(AwsInstanceList::Region.list).to include 'eu-west-1' }
+  it { expect(Region.descriptions.regions).to be_a Array }
+
+  it { expect(Region.list).to include 'eu-west-1' }
 
 end
