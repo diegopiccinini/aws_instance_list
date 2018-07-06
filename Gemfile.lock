@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     aws_instance_list (0.1.0)
+      aws-sdk-ec2 (~> 1.37)
       aws-sdk-rds (~> 1.23)
 
 GEM
@@ -14,6 +15,9 @@ GEM
       aws-partitions (~> 1.0)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
+    aws-sdk-ec2 (1.37.0)
+      aws-sdk-core (~> 3)
+      aws-sigv4 (~> 1.0)
     aws-sdk-rds (1.23.0)
       aws-sdk-core (~> 3)
       aws-sigv4 (~> 1.0)
