@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-include AwsInstanceList
-
 describe Region do
 
   it { expect(Region.ec2).to be_a Aws::EC2::Client }
