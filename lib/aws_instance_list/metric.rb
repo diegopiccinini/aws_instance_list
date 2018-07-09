@@ -34,7 +34,8 @@ module AwsInstanceList
         statistics: ["Minimum"]
       })
 
-      resp.datapoints.last.minimum
+      resp.datapoints.last.minimum / ( 1024.0 ** 3)
+
     end
 
   end

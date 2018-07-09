@@ -7,7 +7,33 @@ module AwsInstanceList
 
     def initialize
       @regions=AwsInstanceList::Region.list
+      @db_list=[]
     end
 
+    def db_list
+
+      if @db_list.empty?
+
+        threads = []
+
+        regions.each do |region|
+          threads << Thread.new do
+            rds=AwsInstanceList::RDS.new region: region
+            rds.db_instances
+            @db_list+=rds.db_list
+          end
+
+        end
+
+        loop do
+          sleep 5
+          break if threads.count { |th| th.alive? } == 0
+        end
+
+      end
+
+      @db_list
+
+    end
   end
 end
