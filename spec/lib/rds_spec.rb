@@ -2,10 +2,13 @@ require 'spec_helper'
 
 describe RDS do
 
+  let(:options) { { max_records: 20} }
+
+ context "without pagination" do
 
   subject { RDS.new region: ENV['REGION'] }
 
-  let(:db_instances) { subject.db_instances({ max_records: 20}) }
+  let(:db_instances) { subject.db_instances(options) }
 
   let(:db_list) { subject.db_list }
 
@@ -15,13 +18,15 @@ describe RDS do
 
   it { expect(db_instances.count).to be > 0 }
 
+  it { expect(subject.db_descriptions(options).marker).to be_nil }
+
   it { expect(db_list).to be_a Array }
 
   it { expect(one_db_list_element.last). to be == subject.region }
 
   it { expect(one_db_list_element[-2]). to be_a Float }
 
-#  after { puts subject.db_list }
+  # after { puts subject.db_list }
 
   describe "#free_storage_space" do
 
@@ -30,5 +35,17 @@ describe RDS do
     it { expect(subject.free_storage_space(db_name)).to be_a Float }
 
   end
+
+ end
+
+ context "with pagination" do
+
+  subject { RDS.new region: ENV['LONG_REGION'] }
+
+  it { expect(subject.db_descriptions(options).marker).to be_a String }
+
+  it { expect(subject.db_instances(options).count).to be > 20 }
+
+ end
 
 end

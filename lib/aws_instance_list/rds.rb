@@ -13,14 +13,23 @@ module AwsInstanceList
 
       @client=Aws::RDS::Client.new region: region
 
+      @db_instances = []
+
     end
 
     def db_descriptions options={}
-      @db_descriptions||=client.describe_db_instances(options)
+      client.describe_db_instances(options)
     end
 
     def db_instances options={}
-      @db_intances||=db_descriptions(options).db_instances
+      descriptions=db_descriptions(options)
+      @db_instances+=descriptions.db_instances
+      if descriptions.marker
+        options[:marker]=descriptions.marker
+        db_instances(options)
+      else
+        @db_instances
+      end
     end
 
     def db_list fields: nil
