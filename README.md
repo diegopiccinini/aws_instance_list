@@ -29,6 +29,8 @@ Add a test.env file with:
 
 ```bash
 DB_INSTANCE_IDENTIFIER=identifier_name_db
+REGION=aws_region_to_test # sample: eu-central-1
+
 ```
 
 And run

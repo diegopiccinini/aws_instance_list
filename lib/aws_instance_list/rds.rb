@@ -28,7 +28,7 @@ module AwsInstanceList
       fields||=load_db_fields
 
       db_instances.map do |i|
-        fields.map { |f| i.send(f) } << region
+        fields.map { |f| i.send(f) } << free_storage_space(i.db_instance_identifier) << region
       end
     end
 
@@ -51,6 +51,12 @@ module AwsInstanceList
     def demodulize
       self.class.name.split('::').last
     end
+
+    def free_storage_space db_instance_identifier
+      metric = Metric.new region: region
+      metric.free_storage_space db_instance_identifier
+    end
+
   end
 
 end

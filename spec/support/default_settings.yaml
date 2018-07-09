@@ -2,7 +2,7 @@
 RDS:
   db:
     fields:
-      - db_name
+      - db_instance_identifier
       - engine
       - allocated_storage
       - db_instance_status

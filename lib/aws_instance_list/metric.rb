@@ -28,7 +28,7 @@ module AwsInstanceList
             value: db_instance_identifier,
           },
         ],
-        start_time: Time.now - 300,
+        start_time: Time.now - 600,
         end_time: Time.now ,
         period: 60,
         statistics: ["Minimum"]
