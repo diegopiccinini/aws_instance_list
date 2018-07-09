@@ -26,8 +26,6 @@ describe RDS do
 
   it { expect(one_db_list_element[-2]). to be_a Float }
 
-  # after { puts subject.db_list }
-
   describe "#free_storage_space" do
 
     let(:db_name) { ENV['DB_INSTANCE_IDENTIFIER'] }
