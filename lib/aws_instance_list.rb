@@ -1,6 +1,7 @@
 require "aws_instance_list/version"
 require "aws_instance_list/region"
 require "aws_instance_list/rds"
+require "aws_instance_list/metric"
 
 require 'dotenv/load'
 

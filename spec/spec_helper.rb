@@ -1,5 +1,10 @@
 require "bundler/setup"
 require "aws_instance_list"
+require "byebug"
+
+require 'dotenv/load'
+
+Dotenv.load('test.env')
 
 include AwsInstanceList
 

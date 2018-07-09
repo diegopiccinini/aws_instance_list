@@ -10,6 +10,6 @@ describe RDS do
 
   it { expect(subject.db_list).to be_a Array }
 
-  #after { puts subject.db_list }
+#  after { puts subject.db_list }
 
 end

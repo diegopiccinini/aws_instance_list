@@ -37,7 +37,7 @@ module AwsInstanceList
     end
 
     def yaml
-      @yaml||=yaml_default.merge(yaml_file)[self.class.name.split('::').last]
+      @yaml||=yaml_default.merge(yaml_file)[demodulize]
     end
 
     def yaml_default
@@ -48,6 +48,9 @@ module AwsInstanceList
       ENV.has_key?('AWS_INSTANCE_LIST_YAML') ? YAML.load_file(ENV['AWS_INSTANCE_LIST_YAML']) : {}
     end
 
+    def demodulize
+      self.class.name.split('::').last
+    end
   end
 
 end
