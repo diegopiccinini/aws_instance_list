@@ -7,6 +7,8 @@ describe RDS do
 
   let(:options) { { max_records: 20 } }
 
+  let(:client) { instance_double(Aws::RDS::Client) }
+
   describe "#new" do
 
     subject { RDS.new region: ENV['REGION'] }
@@ -15,15 +17,11 @@ describe RDS do
 
   end
 
-  context "without pagination" do
-
-    subject { RDS.new region: ENV['REGION'] }
+  describe "#db_list" do
 
     before do
 
       # comment this before to test calling AWS services in your ENV['REGION']
-
-      client=instance_double(Aws::RDS::Client)
 
       allow(client).to receive(:describe_db_instances).with(options).and_return(descriptions)
 
@@ -37,6 +35,12 @@ describe RDS do
 
     end
 
+
+
+  context "without pagination" do
+
+    subject { RDS.new region: ENV['REGION'] }
+
     let(:descriptions) do
 
       instances = 10.times.map do |i|
@@ -45,7 +49,6 @@ describe RDS do
 
       Description.new( instances, nil)
     end
-
 
     let(:db_instances) { subject.db_instances(options) }
 
@@ -78,9 +81,39 @@ describe RDS do
 
     subject { RDS.new region: ENV['LONG_REGION'] }
 
+    let(:second_options) { { max_records: 20, marker: 'SecondOptions' } }
+
+    before do
+
+      allow(client).to receive(:describe_db_instances).with(second_options).and_return(second_descriptions)
+
+    end
+
+    let(:descriptions) do
+
+      instances = 20.times.map do |i|
+        DbInstance.new( "db_#{i}", 'mysql', rand(100), 'available')
+      end
+
+      Description.new( instances, 'SecondOptions')
+
+    end
+
+    let(:second_descriptions) do
+
+      instances = 20.upto(34).map do |i|
+        DbInstance.new( "db_#{i}", 'mysql', rand(100), 'available')
+      end
+
+      Description.new( instances, nil)
+
+    end
+
     it { expect(subject.db_descriptions(options).marker).to be_a String }
 
     it { expect(subject.db_instances(options).count).to be > 20 }
+
+  end
 
   end
 
