@@ -25,7 +25,6 @@ module AwsInstanceList
         end
 
         loop do
-          sleep 5
           break if threads.count { |th| th.alive? } == 0
         end
 
