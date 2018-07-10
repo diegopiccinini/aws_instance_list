@@ -2,7 +2,10 @@
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/aws_instance_list`. To experiment with that code, run `bin/console` for an interactive prompt.
 
-TODO: Delete this and the text above, and describe your gem
+This gem is an easy way to get AWS instance list in all regions.
+The class AwsIntanceList::List runs one Thread by region to get the data in each one. Finally join all in one Array.
+
+Using the AWS describe instance we can get the instances but the metrics are not available.
 
 ## Installation
 
@@ -22,7 +25,31 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+As a library you need require it after install the gem.
+
+```ruby
+
+require 'aws_instance_list'
+
+list= AwsInstanceList::List.new
+
+# sample to get all rds instances
+
+list.db_list # will return an array like this
+
+# db_instance_identifier, engine, storage (GBytes), status, free storage available, region
+
+#\>
+[
+["db1", "mysql", 50, "available", 45.3829460144043, "eu-west-1"],
+["db2", "mysql", 50, "available", 44.111881256103516, "eu-west-1"],
+["db3", "mysql", 20, "available", 15.590309143066406, "eu-west-2"],
+["db4", "mysql", 100, "available", 94.48283767700195, "eu-west-2"]
+]
+
+```
+
+
 
 ## Test
 Add a test.env file with:
@@ -39,6 +66,7 @@ And run
 ```bash
 rspec
 ```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
