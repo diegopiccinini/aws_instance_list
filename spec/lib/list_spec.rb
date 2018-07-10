@@ -4,14 +4,15 @@ describe List do
 
   before do
     allow(AwsInstanceList::Region).to receive(:list).and_return( %w(region1 region2) )
-    allow(AwsInstanceList::RDS).to receive(:db_instances)
-    allow(AwsInstanceList::RDS).to receive(:new)
-    allow(AwsInstanceList::RDS).to receive(:db_list).and_return( ['aa'.. 'zb'].to_a )
+    allow(subject).to receive(:rds_db_list).with(region: 'region1').and_return( ('aa'..'bz').to_a )
+    allow(subject).to receive(:rds_db_list).with(region: 'region2').and_return( ('ca'..'cz').to_a )
   end
 
   it { expect(subject.regions.count).to be == 2 }
 
-  it { expect(subject.db_list.count).to be == 61 }
+  it { expect(subject.rds_db_list(region: 'region1').count).to be == 52 }
+
+  it { expect(subject.db_list.count).to be == 78 }
 
 
 end

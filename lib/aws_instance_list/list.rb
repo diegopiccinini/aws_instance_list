@@ -17,10 +17,9 @@ module AwsInstanceList
         threads = []
 
         regions.each do |region|
+
           threads << Thread.new do
-            rds=AwsInstanceList::RDS.new region: region
-            rds.db_instances
-            @db_list+=rds.db_list
+            @db_list+=rds_db_list region: region
           end
 
         end
@@ -35,5 +34,12 @@ module AwsInstanceList
       @db_list
 
     end
+
+    def rds_db_list region:
+      rds=AwsInstanceList::RDS.new region: region
+      rds.db_instances
+      rds.db_list
+    end
+
   end
 end
