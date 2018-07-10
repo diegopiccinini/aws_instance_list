@@ -62,7 +62,7 @@ module AwsInstanceList
     end
 
     def free_storage_space db_instance_identifier
-      metric = Metric.new region: region
+      metric = AwsInstanceList::Metric.new region: region
       metric.free_storage_space db_instance_identifier
     end
 

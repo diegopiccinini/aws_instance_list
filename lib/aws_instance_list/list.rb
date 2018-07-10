@@ -7,7 +7,7 @@ module AwsInstanceList
 
     def initialize
       @regions=AwsInstanceList::Region.list
-      @db_list=[]
+      @db_list={}
     end
 
     def db_list
@@ -19,7 +19,7 @@ module AwsInstanceList
         regions.each do |region|
 
           threads << Thread.new do
-            @db_list+=rds_db_list region: region
+            @db_list[region]=rds_db_list region: region
           end
 
         end
@@ -31,7 +31,7 @@ module AwsInstanceList
 
       end
 
-      @db_list
+      @db_list.values.flatten(1)
 
     end
 

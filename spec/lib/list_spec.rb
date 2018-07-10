@@ -12,7 +12,7 @@ describe List do
 
   it { expect(subject.rds_db_list(region: 'region1').count).to be == 52 }
 
-  it { expect(subject.db_list.count).to be == 78 }
+  it { expect(subject.db_list).to match_array ('aa'..'cz').to_a }
 
 
 end
