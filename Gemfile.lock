@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    aws_instance_list (1.0.1)
+    aws_instance_list (1.0.2)
       aws-sdk-cloudwatch (~> 1.6)
       aws-sdk-ec2 (~> 1.37)
       aws-sdk-rds (~> 1.23)

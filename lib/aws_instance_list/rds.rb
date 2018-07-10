@@ -32,11 +32,11 @@ module AwsInstanceList
       end
     end
 
-    def db_list fields: nil
+    def db_list options: {}, fields: nil
 
       fields||=load_db_fields
 
-      db_instances.map do |i|
+      db_instances(options).map do |i|
         fields.map { |f| i.send(f) } << free_storage_space(i.db_instance_identifier) << region
       end
     end
