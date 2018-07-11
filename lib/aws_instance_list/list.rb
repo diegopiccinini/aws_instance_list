@@ -1,4 +1,3 @@
-
 module AwsInstanceList
 
   class List

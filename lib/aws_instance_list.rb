@@ -1,4 +1,8 @@
-Dir.glob(File.join('lib','aws_instance_list','*.rb')).each { |file| require file[4..-4] }
+require 'aws_instance_list/list'
+require 'aws_instance_list/region'
+require 'aws_instance_list/metric'
+require 'aws_instance_list/rds'
+require 'aws_instance_list/version'
 
 require 'dotenv/load'
 
