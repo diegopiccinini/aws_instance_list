@@ -10,6 +10,6 @@ Dotenv.load
 
 module AwsInstanceList
 
-  DEFAULT_SETTINGS= File.join(File.dirname(__FILE__),%w(.. spec support default_settings.yaml))
+  DEFAULT_SETTINGS= File.join(File.dirname(__FILE__),%w(config default_settings.yaml))
 
 end
