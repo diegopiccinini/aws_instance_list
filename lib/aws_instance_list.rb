@@ -1,3 +1,4 @@
+require 'aws_instance_list/base'
 require 'aws_instance_list/list'
 require 'aws_instance_list/region'
 require 'aws_instance_list/metric'

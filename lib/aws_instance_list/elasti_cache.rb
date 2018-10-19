@@ -1,25 +1,28 @@
 require 'aws-sdk-elasticache'
-require 'yaml'
 
 module AwsInstanceList
 
-  class ElastiCache
-
-    attr_accessor :client, :region
+  class ElastiCache < AwsInstanceList::Base
 
     def initialize region: 'eu-west-1'
 
-      @region=region
+      super region: region
 
       @client=Aws::ElastiCache::Client.new region: region
-      @instances=[]
 
+    end
+
+    def list_method
+      :cache_clusters
     end
 
     def descriptions options={}
       client.describe_cache_clusters(options)
     end
 
+    def bytes_used_for_cache cache_cluster_id
+      metric.bytes_used_for_cache cache_cluster_id
+    end
   end
 end
 
