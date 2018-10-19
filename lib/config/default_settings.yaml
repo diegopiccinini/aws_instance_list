@@ -6,3 +6,8 @@ RDS:
       - engine
       - allocated_storage
       - db_instance_status
+ElastiCache:
+  cache:
+    fields:
+      - cache_cluster_id
+      - cache_node_type

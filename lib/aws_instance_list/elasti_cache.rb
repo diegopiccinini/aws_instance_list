@@ -23,6 +23,30 @@ module AwsInstanceList
     def bytes_used_for_cache cache_cluster_id
       metric.bytes_used_for_cache cache_cluster_id
     end
+
+    def freeable_memory cache_cluster_id
+      metric.freeable_memory cache_cluster_id
+    end
+
+    def cache_list options: {}, fields: nil
+
+      fields||=load_cache_fields
+
+      instances(options).map do |i|
+        fields.map { |f| i.send(f) } + metrics(i.cache_cluster_id) << region
+      end
+    end
+
+    def load_cache_fields
+      yaml['cache']['fields']
+    end
+
+    def metrics cache_cluster_id
+      used=bytes_used_for_cache(cache_cluster_id)
+      free=freeable_memory(cache_cluster_id)
+      total=free + used
+      [used, total, used / total * 100.0]
+    end
   end
 end
 

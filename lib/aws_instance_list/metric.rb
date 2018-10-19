@@ -54,7 +54,28 @@ module AwsInstanceList
         statistics: ["Maximum"]
       })
 
-      resp.datapoints.last.minimum / ( 1024.0 ** 3)
+      resp.datapoints.last.maximum
+
+    end
+
+
+    def freeable_memory cache_cluster_id
+      resp=statistics( {
+        namespace: "AWS/ElastiCache",
+        metric_name: "FreeableMemory",
+        dimensions: [
+          {
+            name: "CacheClusterId",
+            value: cache_cluster_id,
+          },
+        ],
+        start_time: Time.now - 600,
+        end_time: Time.now ,
+        period: 60,
+        statistics: ["Maximum"]
+      })
+
+      resp.datapoints.last.maximum
 
     end
 
