@@ -50,9 +50,9 @@ module AwsInstanceList
     end
 
     def metrics instance
-      used=bytes_used_for_cache(instance.cache_cluster_id)
-      total=maxmemory instance.cache_node_type
-      [used, total, used / total * 100.0]
+      used=bytes_used_for_cache(instance.cache_cluster_id) / 1024
+      total=maxmemory(instance.cache_node_type) / 1024
+      [total, used]
     end
 
   end
