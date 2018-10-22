@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ElastiCache do
 
-  subject { ElastiCache.new region: ENV['LONG_REGION'] }
+  subject { ElastiCache.new region: ENV['REGION'] }
 
   let(:clusters) { subject.descriptions.cache_clusters }
 
@@ -17,8 +17,9 @@ describe ElastiCache do
   it { expect(instances.first.cache_cluster_id).to be_a String }
 
   it do
-    puts cache_list
-    expect(cache_list.first.last).to be_a Float
+    cache_list.each do |l|
+      expect(l[-2]).to be > 0
+    end
   end
 
 end

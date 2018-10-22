@@ -10,4 +10,38 @@ ElastiCache:
   cache:
     fields:
       - cache_cluster_id
+      - engine
       - cache_node_type
+  maxmemory:
+    cache.t1.micro:       142606336
+    cache.t2.micro:       581959680
+    cache.t2.small:      1665138688
+    cache.t2.medium:     3461349376
+    cache.m1.small:       943718400
+    cache.m1.medium:     3093299200
+    cache.m1.large:      7025459200
+    cache.m1.xlarge:    14889779200
+    cache.m2.xlarge:    17091788800
+    cache.m2.2xlarge:   35022438400
+    cache.m2.4xlarge:   70883737600
+    cache.m3.medium:     2988441600
+    cache.m3.large:      6501171200
+    cache.m3.xlarge:    14260633600
+    cache.m3.2xlarge:   29989273600
+    cache.m4.large:      6892593152
+    cache.m4.xlarge:    15328501760
+    cache.m4.2xlarge:   31889126359
+    cache.m4.4xlarge:   65257290629
+    cache.m4.10xlarge: 166047614239
+    cache.c1.xlarge:     6501171200
+    cache.r3.large:     14470348800
+    cache.r3.xlarge:    30513561600
+    cache.r3.2xlarge:   62495129600
+    cache.r3.4xlarge:  126458265600
+    cache.r3.8xlarge:  254384537600
+    cache.r4.large:     13201781556
+    cache.r4.xlarge:    26898228839
+    cache.r4.2xlarge:   54197537997
+    cache.r4.4xlarge:  108858546586
+    cache.r4.8xlarge:  218255432090
+    cache.r4.16xlarge: 437021573120

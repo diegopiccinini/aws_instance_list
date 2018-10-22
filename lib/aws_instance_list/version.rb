@@ -1,3 +1,3 @@
 module AwsInstanceList
-  VERSION = "1.3-test"
+  VERSION = "1.3.1"
 end

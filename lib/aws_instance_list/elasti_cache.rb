@@ -33,20 +33,28 @@ module AwsInstanceList
       fields||=load_cache_fields
 
       instances(options).map do |i|
-        fields.map { |f| i.send(f) } + metrics(i.cache_cluster_id) << region
+        fields.map { |f| i.send(f) } + metrics(i) << region
       end
+    end
+
+    def group_name i
+      i.cache_parameter_group.cache_parameter_group_name
+    end
+
+    def maxmemory cache_node_type
+      yaml['maxmemory'][cache_node_type]
     end
 
     def load_cache_fields
       yaml['cache']['fields']
     end
 
-    def metrics cache_cluster_id
-      used=bytes_used_for_cache(cache_cluster_id)
-      free=freeable_memory(cache_cluster_id)
-      total=free + used
+    def metrics instance
+      used=bytes_used_for_cache(instance.cache_cluster_id)
+      total=maxmemory instance.cache_node_type
       [used, total, used / total * 100.0]
     end
+
   end
 end
 
