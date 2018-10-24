@@ -45,3 +45,10 @@ ElastiCache:
     cache.r4.4xlarge:  108858546586
     cache.r4.8xlarge:  218255432090
     cache.r4.16xlarge: 437021573120
+
+ElasticsearchService:
+  domain_status:
+    fields:
+      - domain_id
+      - domain_name
+

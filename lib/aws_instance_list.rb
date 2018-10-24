@@ -4,6 +4,7 @@ require 'aws_instance_list/region'
 require 'aws_instance_list/metric'
 require 'aws_instance_list/rds'
 require 'aws_instance_list/elasti_cache'
+require 'aws_instance_list/elasticsearch_service'
 require 'aws_instance_list/version'
 
 require 'dotenv/load'
