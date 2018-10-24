@@ -18,14 +18,14 @@ module AwsInstanceList
       client.list_metrics options
     end
 
-    def free_storage_space db_instance_identifier
+    def free_storage_space identifier, namespace: 'AWS/RDS', dimension_name: 'DBInstanceIdentifier'
       resp=statistics( {
-        namespace: "AWS/RDS",
+        namespace: namespace,
         metric_name: "FreeStorageSpace",
         dimensions: [
           {
-            name: "DBInstanceIdentifier",
-            value: db_instance_identifier,
+            name: dimension_name,
+            value: identifier,
           },
         ],
         start_time: Time.now - 600,
@@ -81,6 +81,10 @@ module AwsInstanceList
 
       resp.datapoints.last.maximum
 
+    end
+
+    def es_free_storage_space domain_name
+      free_storage_space domain_name, namespace: 'AWS/ES', dimension_name: 'DomainName'
     end
 
   end
