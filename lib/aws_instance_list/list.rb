@@ -47,5 +47,13 @@ module AwsInstanceList
       ec.cache_list
     end
 
+    def elasticsearch_list
+      list call_to: :elasticsearch_service_list
+    end
+
+    def elasticsearch_service_list region:
+      es=AwsInstanceList::ElasticsearchService.new region: region
+      es.domain_list
+    end
   end
 end
